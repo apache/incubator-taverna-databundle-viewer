@@ -50,7 +50,7 @@ for any questions, suggestions and discussions about the
 Apache Taverna Databundle Viewer.
 
 Bugs and feature plannings are tracked in the `TAVERNA`
-[Issue tracker](http://taverna.incubator.apache.org/community/lists#dev)
+[Issue tracker](https://issues.apache.org/jira/browse/TAVERNA/component/12326902)
 under the component _GSOC Taverna Databundle Viewer_. Feel free to create
 an 
 
