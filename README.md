@@ -16,6 +16,10 @@
 -->
 # Apache Taverna Databundle Viewer
 
+[![Code Climate](https://codeclimate.com/github/Samhane/incubator-taverna-databundle-viewer/badges/gpa.svg)](https://codeclimate.com/github/Samhane/incubator-taverna-databundle-viewer)
+[![Test Coverage](https://codeclimate.com/github/Samhane/incubator-taverna-databundle-viewer/badges/coverage.svg)](https://codeclimate.com/github/Samhane/incubator-taverna-databundle-viewer/coverage)
+[![Build Status](https://semaphoreci.com/api/v1/projects/f0bcedbf-b6fb-4605-975a-72e724706673/442177/badge.svg)](https://semaphoreci.com/samhane/incubator-taverna-databundle-viewer)
+
 Apache Taverna Databundle Viewer is planned as a web interface
 for displaying 
 [Taverna databundles](https://github.com/apache/incubator-taverna-language/tree/master/taverna-databundle)
@@ -80,4 +84,3 @@ _TODO_
 _TODO_
 
 * ...
-
