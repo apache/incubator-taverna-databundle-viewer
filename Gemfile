@@ -51,3 +51,7 @@ group :development, :test do
   gem 'capybara-screenshot'
   gem 'headless'
 end
+
+group :test do
+  gem 'codeclimate-test-reporter'
+end

@@ -7,6 +7,9 @@ require 'capybara/rails'
 require 'capybara/rspec'
 require 'capybara-screenshot/rspec'
 require 'capybara/webkit/matchers'
+require 'codeclimate-test-reporter'
+
+CodeClimate::TestReporter.start
 
 Capybara.javascript_driver = :webkit
 
