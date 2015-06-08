@@ -86,6 +86,8 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
+    faker (1.4.3)
+      i18n (~> 0.5)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
     headless (2.1.0)
@@ -228,6 +230,7 @@ DEPENDENCIES
   database_rewinder
   devise
   factory_girl_rails
+  faker
   headless
   jbuilder (~> 2.0)
   jquery-rails

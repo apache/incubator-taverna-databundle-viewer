@@ -37,6 +37,8 @@ Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
   "screen_#{example.full_description.gsub(' ', '-').gsub(/^.*\/spec\//, '')}"
 end
 
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|

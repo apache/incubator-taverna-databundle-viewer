@@ -52,6 +52,7 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'capybara-screenshot'
   gem 'headless'
+  gem 'faker'
 end
 
 group :test do
