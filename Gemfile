@@ -7,6 +7,8 @@ gem 'rails', '4.2.1'
 gem 'puma'
 
 gem 'devise'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
