@@ -17,19 +17,18 @@ html
           .navbar-custom-menu
             ul.nav.navbar-nav
               li.dropdown.user.user-menu
-                a.dropdown-toggle[href="#" data-toggle="dropdown"]
-                  span.hidden-xs
-                    | Guest
-                ul.dropdown-menu
-                  li.user-header
-                    p
-                      | Guest
-                      small
-                        | Member since Nov. 2012
-                  li.user-footer
-                    .pull-right
-                      a.btn.btn-default.btn-flat[href="#"]
-                        | Sign out
+                - if user_signed_in?
+                  a.dropdown-toggle#open_user_dropdown[href="#" data-toggle="dropdown"]
+                    span.hidden-xs
+                      = "#{current_user.firstname}, #{current_user.lastname}"
+                - else
+                  = link_to 'Sign in', new_user_session_path
+                - if user_signed_in?
+                  ul.dropdown-menu
+                    li.user-footer
+                      .pull-right
+                        = link_to 'Sign out', destroy_user_session_path, class: 'btn btn-default btn-flat', id: 'sign_out'
+
       aside.main-sidebar
         section.sidebar
           .user-panel
