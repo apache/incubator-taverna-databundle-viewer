@@ -29,6 +29,8 @@ system.
 
 This module is **work in progress** as part of Google Summer of Code 2015.
 
+You can see working prototype there: [DataBundleViewer](http://databundle.herokuapp.com/)  
+
 
 
 ## License
