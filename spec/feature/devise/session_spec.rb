@@ -58,4 +58,26 @@ RSpec.describe 'Session' do
     expect(current_path).to eq(root_path)
     expect(page).not_to have_content user.firstname
   end
+
+  context 'omniauth' do
+    it 'facebook' do
+      OmniAuth.config.test_mode = true
+      OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({provider: 'facebook', uid: '123545', info: {email: Faker::Internet.email}})
+      Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:facebook]
+      visit new_user_session_path
+      expect {
+        click_link 'omniauth_facebook'
+      }.to change(User, :count).by(1)
+    end
+
+    it 'google' do
+      OmniAuth.config.test_mode = true
+      OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({provider: 'google_oauth2', uid: '123545', info: {email: Faker::Internet.email}})
+      Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
+      visit new_user_session_path
+      expect {
+        click_link 'omniauth_google_oauth2'
+      }.to change(User, :count).by(1)
+    end
+  end
 end
