@@ -2,10 +2,12 @@
   p
     | - OR -
   - if devise_mapping.omniauthable?
-    - resource_class.omniauth_providers.each do |provider|
-      = link_to omniauth_authorize_path(resource_name, provider), class: "btn btn-block btn-social btn-#{provider} btn-flat" do
-        i.fa{class="fa-#{provider}"}
-        = "Sign in with #{provider.to_s.titleize}"
+    = link_to omniauth_authorize_path(resource_name, :facebook), class: 'btn btn-block btn-social btn-facebook btn-flat', id: 'omniauth_facebook' do
+      i.fa.fa-facebook
+      = 'Sign in with Facebook'
+    = link_to omniauth_authorize_path(resource_name, :google_oauth2), class: 'btn btn-block btn-social btn-google-plus btn-flat', id: 'omniauth_google_oauth2' do
+      i.fa.fa-google-plus
+      = 'Sign in with Google+'
 - if controller_name != 'sessions'
   = link_to 'Log in', new_session_path(resource_name), class: 'text-center'
   br
