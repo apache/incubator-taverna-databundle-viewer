@@ -70,6 +70,26 @@ before accepting a larger contribution.
 
 # Building and install requirements
 
+1. Install Ruby 2.2.1. With using rvm - `rvm install 2.2.1`
+2. Run `bundle install` to install dependencies
+3. Run `rake db:create db:migrate` to create and set up database. By default used PostgreSQL
+4. Run server with command `rails s`
+
+For using omniauth you need set up environmental variables FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET.
+
+For Google omniauth:
+
+1. Visit [Console google](https://console.developers.google.com/). Click by link `APIs & auth` -> `Credentials` -> `Create new Client ID`
+2. Set Redirect URIs as http://yoursite.com/users/auth/google_oauth2/callback
+3. Enable Google+ API. Click by link `APIs & auth` -> `Google+ API` -> `Enable API`
+
+For Facebook omniauth:
+
+1. Visit [Developers Facebook](https://developers.facebook.com/)
+2. Click by `My Apps` -> `Add a New App`
+3. Visit `Settings` -> `Advanced`. Fill in field `Valid OAuth redirect URIs` with http://yoursite.com/users/auth/facebook/callback
+
+
 _TODO_
 
 * ...
