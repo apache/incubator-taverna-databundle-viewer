@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
+  validates :email, presence: true, uniqueness: true
+
   def self.from_omniauth(auth)
     # Find user by omniauth
     # If exist user with uid, return it
