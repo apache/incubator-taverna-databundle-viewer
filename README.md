@@ -71,9 +71,8 @@ before accepting a larger contribution.
 # Building and install requirements
 
 1. Install Ruby 2.2.1. With using rvm - `rvm install 2.2.1`
-2. Run `bundle install` to install dependencies
-3. Run `rake db:create db:migrate` to create and set up database. By default used PostgreSQL
-4. Run server with command `rails s`
+2. Run `bin/setup` to install dependencies, create and set up database. By default used PostgreSQL
+3. Run server with command `rails s`
 
 For using omniauth you need set up environmental variables FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET.
 
