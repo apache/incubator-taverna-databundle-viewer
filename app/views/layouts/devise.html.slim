@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    meta[charset="UTF-8"]
+    title
+      | DatabundleViewer
+    meta[content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"]
+    = stylesheet_link_tag 'application', media: 'all'
+    = csrf_meta_tags
+    link[href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"]
+    link[href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css"]
+  = yield
+  = javascript_include_tag 'application'

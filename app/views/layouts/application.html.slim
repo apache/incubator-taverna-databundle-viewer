@@ -1,0 +1,48 @@
+doctype html
+html
+  head
+    meta[charset="UTF-8"]
+    title
+      | DatabundleViewer
+    meta[content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"]
+    = stylesheet_link_tag 'application', media: 'all'
+    = csrf_meta_tags
+    link[href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"]
+    link[href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css"]
+  body.skin-blue.fixed.sidebar-mini
+    .wrapper
+      header.main-header
+        = link_to 'Databundle Viewer', root_path, class: 'logo'
+        nav.navbar.navbar-static-top[role="navigation"]
+          .navbar-custom-menu
+            ul.nav.navbar-nav
+              li.dropdown.user.user-menu
+                - if user_signed_in?
+                  a.dropdown-toggle#open_user_dropdown[href="#" data-toggle="dropdown"]
+                    span.hidden-xs
+                      = "#{current_user.firstname}, #{current_user.lastname}"
+                - else
+                  = link_to 'Sign in', new_user_session_path
+                - if user_signed_in?
+                  ul.dropdown-menu
+                    li.user-footer
+                      .pull-right
+                        = link_to 'Sign out', destroy_user_session_path, class: 'btn btn-default btn-flat', id: 'sign_out'
+
+      aside.main-sidebar
+        section.sidebar
+          .user-panel
+          ul.sidebar-menu
+            li.header
+              | MAIN NAVIGATION
+            li.treeview.active
+              a[href="#"]
+                i.fa.fa-dashboard
+                span
+                  | Dashboard
+                i.fa.fa-angle-left.pull-right
+      .content-wrapper
+        = yield
+      footer.main-footer
+      .control-sidebar-bg
+    = javascript_include_tag 'application'

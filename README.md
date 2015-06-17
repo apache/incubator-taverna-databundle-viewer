@@ -16,6 +16,10 @@
 -->
 # Apache Taverna Databundle Viewer
 
+[![Code Climate](https://codeclimate.com/github/Samhane/incubator-taverna-databundle-viewer/badges/gpa.svg)](https://codeclimate.com/github/Samhane/incubator-taverna-databundle-viewer)
+[![Test Coverage](https://codeclimate.com/github/Samhane/incubator-taverna-databundle-viewer/badges/coverage.svg)](https://codeclimate.com/github/Samhane/incubator-taverna-databundle-viewer/coverage)
+[![Build Status](https://semaphoreci.com/api/v1/projects/f0bcedbf-b6fb-4605-975a-72e724706673/442177/badge.svg)](https://semaphoreci.com/samhane/incubator-taverna-databundle-viewer)
+
 Apache Taverna Databundle Viewer is planned as a web interface
 for displaying 
 [Taverna databundles](https://github.com/apache/incubator-taverna-language/tree/master/taverna-databundle)
@@ -24,6 +28,8 @@ for displaying
 system.
 
 This module is **work in progress** as part of Google Summer of Code 2015.
+
+You can see working prototype there: [DataBundleViewer](http://databundle.herokuapp.com/)
 
 
 
@@ -64,6 +70,25 @@ before accepting a larger contribution.
 
 # Building and install requirements
 
+1. Install Ruby 2.2.1. With using rvm - `rvm install 2.2.1`
+2. Run `bin/setup` to install dependencies, create and set up database. By default used PostgreSQL
+3. Run server with command `rails s`
+
+For using omniauth you need set up environmental variables FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET.
+
+For Google omniauth:
+
+1. Visit [Console google](https://console.developers.google.com/). Click by link `APIs & auth` -> `Credentials` -> `Create new Client ID`
+2. Set Redirect URIs as http://yoursite.com/users/auth/google_oauth2/callback
+3. Enable Google+ API. Click by link `APIs & auth` -> `Google+ API` -> `Enable API`
+
+For Facebook omniauth:
+
+1. Visit [Developers Facebook](https://developers.facebook.com/)
+2. Click by `My Apps` -> `Add a New App`
+3. Visit `Settings` -> `Advanced`. Fill in field `Valid OAuth redirect URIs` with http://yoursite.com/users/auth/facebook/callback
+
+
 _TODO_
 
 * ...
@@ -80,4 +105,3 @@ _TODO_
 _TODO_
 
 * ...
-
