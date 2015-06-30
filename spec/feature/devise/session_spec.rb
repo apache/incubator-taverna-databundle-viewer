@@ -40,6 +40,7 @@ RSpec.describe 'Session' do
     it 'incorrect email' do
       fill_in 'user_password', with: user.password
       click_button 'sign_in'
+      expect(page).to have_content 'Invalid email or password.'
       expect(current_path).to eq(new_user_session_path)
     end
 
@@ -47,6 +48,7 @@ RSpec.describe 'Session' do
       fill_in 'user_email', with: user.email
       fill_in 'user_password', with: '111'
       click_button 'sign_in'
+      expect(page).to have_content 'Invalid email or password.'
       expect(current_path).to eq(new_user_session_path)
     end
   end

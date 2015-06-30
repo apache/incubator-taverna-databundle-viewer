@@ -8,7 +8,11 @@ body.login-page
       p.login-box-msg
         | Sign in to start your session
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-        = devise_error_messages!
+        .alert.alert-danger.alert-dismissable
+          button.close aria-hidden="true" data-dismiss="alert" type="button"  ×
+          h5
+            i.icon.fa.fa-ban
+            = flash.alert
         .form-group.has-feedback
           = f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email'
           span.glyphicon.glyphicon-envelope.form-control-feedback
