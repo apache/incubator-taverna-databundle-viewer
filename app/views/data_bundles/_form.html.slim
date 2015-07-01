@@ -1,6 +1,8 @@
 - if user_signed_in?
   = form_for @data_bundle, multipart: true do |f|
     .field
+      = f.text_field :name
+    .field
       = f.file_field :file
     .actions
-      = f.submit
+      = f.submit 'Save', id: 'save_data_bundle'

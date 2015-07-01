@@ -23,6 +23,7 @@ class DataBundlesController < ApplicationController
   # GET /data_bundles
   def index
     @data_bundles = DataBundle.all
+    @data_bundle = DataBundle.new
   end
 
   # GET /data_bundles/1

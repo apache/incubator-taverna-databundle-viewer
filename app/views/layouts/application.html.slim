@@ -35,11 +35,10 @@ html
           ul.sidebar-menu
             li.header
               | MAIN NAVIGATION
-            li.treeview.active
-              a[href="#"]
-                i.fa.fa-dashboard
+            li.active
+              = link_to data_bundles_path, id: 'open_data_bundles' do
                 span
-                  | Dashboard
+                  | DataBundles
                 i.fa.fa-angle-left.pull-right
       .content-wrapper
         = yield

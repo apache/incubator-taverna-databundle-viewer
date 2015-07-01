@@ -23,4 +23,8 @@ RSpec.describe DataBundle, type: :model do
   it 'default factory - valid' do
     expect(build(:data_bundle)).to be_valid
   end
+
+  it 'without user - invalid' do
+    expect(build(:data_bundle, user: nil)).not_to be_valid
+  end
 end
