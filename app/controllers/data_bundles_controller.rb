@@ -28,6 +28,10 @@ class DataBundlesController < ApplicationController
 
   # GET /data_bundles/1
   def show
+    bundle_file = ROBundle::File.open(@data_bundle.file.read)
+    manifest = JSON.parse(bundle_file.find_entry('.ro/manifest.json').get_input_stream.read)
+    inputs = manifest['aggregates'].select { |files| files['folder'] == '/inputs/' }.first
+    bundle_file.find_entry(inputs['file'].sub(/^\//, "")).get_input_stream.read
   end
 
   # GET /data_bundles/1/edit
