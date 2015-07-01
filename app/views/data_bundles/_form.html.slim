@@ -1,0 +1,6 @@
+- if user_signed_in?
+  = form_for @data_bundle, multipart: true do |f|
+    .field
+      = f.file_field :file
+    .actions
+      = f.submit

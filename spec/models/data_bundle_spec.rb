@@ -17,10 +17,10 @@
 # under the License.
 #
 
-Rails.application.routes.draw do
-  resources :data_bundles, except: [:new]
-  get 'welcome/index'
+require 'spec_helper'
 
-  root 'welcome#index'
-  devise_for :users, controllers: {omniauth_callbacks: 'callbacks'}
+RSpec.describe DataBundle, type: :model do
+  it 'default factory - valid' do
+    expect(build(:data_bundle)).to be_valid
+  end
 end

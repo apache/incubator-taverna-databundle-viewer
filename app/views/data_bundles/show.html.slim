@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong File:
+  = @data_bundle.file
+p
+  strong User:
+  = @data_bundle.user_id
+
+= link_to 'Edit', edit_data_bundle_path(@data_bundle)
+'|
+= link_to 'Back', data_bundles_path

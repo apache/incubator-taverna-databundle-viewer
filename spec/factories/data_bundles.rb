@@ -17,10 +17,9 @@
 # under the License.
 #
 
-Rails.application.routes.draw do
-  resources :data_bundles, except: [:new]
-  get 'welcome/index'
-
-  root 'welcome#index'
-  devise_for :users, controllers: {omniauth_callbacks: 'callbacks'}
+FactoryGirl.define do
+  factory :data_bundle do
+    association :user
+    name Faker::Lorem.sentence
+  end
 end

@@ -1,0 +1,23 @@
+h1 Listing data_bundles
+
+table
+  thead
+    tr
+      th File
+      th User
+      th
+      th
+      th
+
+  tbody
+    - @data_bundles.each do |data_bundle|
+      tr
+        td = data_bundle.file
+        td = data_bundle.user_id
+        td = link_to 'Show', data_bundle
+        td = link_to 'Edit', edit_data_bundle_path(data_bundle)
+        td = link_to 'Destroy', data_bundle, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= render partial: 'form'

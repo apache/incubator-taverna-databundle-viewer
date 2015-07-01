@@ -17,10 +17,10 @@
 # under the License.
 #
 
-Rails.application.routes.draw do
-  resources :data_bundles, except: [:new]
-  get 'welcome/index'
+class DataBundle < ActiveRecord::Base
+  mount_uploader :file, ::DataBundleUploader
 
-  root 'welcome#index'
-  devise_for :users, controllers: {omniauth_callbacks: 'callbacks'}
+  belongs_to :user
+
+  validates :user_id, presence: true
 end
