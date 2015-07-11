@@ -9,7 +9,7 @@ html
     = csrf_meta_tags
     link[href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"]
     link[href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css"]
-  body.skin-blue.fixed.sidebar-mini
+  body.skin-blue
     .wrapper
       header.main-header
         = link_to 'Databundle Viewer', root_path, class: 'logo'
@@ -28,18 +28,6 @@ html
                     li.user-footer
                       .pull-right
                         = link_to 'Sign out', destroy_user_session_path, class: 'btn btn-default btn-flat', id: 'sign_out'
-
-      aside.main-sidebar
-        section.sidebar
-          .user-panel
-          ul.sidebar-menu
-            li.header
-              | MAIN NAVIGATION
-            li.active
-              = link_to data_bundles_path, id: 'open_data_bundles' do
-                span
-                  | DataBundles
-                i.fa.fa-angle-left.pull-right
       .content-wrapper
         = yield
       footer.main-footer
