@@ -29,6 +29,7 @@ RSpec.describe 'DataBundles', type: :feature do
   context 'signed in user' do
     let(:user) { create :user }
     let!(:data_bundle) { create :data_bundle, user: user }
+    let!(:data_bundle_foreign) { create :data_bundle }
 
     before do
       sign_in user
@@ -45,6 +46,15 @@ RSpec.describe 'DataBundles', type: :feature do
     end
 
     it 'can see the databundles' do
+      expect(page).to have_content data_bundle.name
+    end
+
+    it 'can not see foreign databundles' do
+      expect(page).not_to have_content data_bundle_foreign.name
+    end
+
+    it 'show databundle' do
+      visit data_bundle_path(data_bundle)
       expect(page).to have_content data_bundle.name
     end
   end
