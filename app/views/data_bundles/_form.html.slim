@@ -1,8 +1,14 @@
-- if user_signed_in?
-  = form_for @data_bundle, multipart: true do |f|
-    .field
-      = f.text_field :name
-    .field
-      = f.file_field :file
-    .actions
-      = f.submit 'Save', id: 'save_data_bundle'
+.box.box-primary
+  .box-header.with-border
+    h3.box-title New Databundle
+  = form_for @data_bundle, multipart: true, html: {role: 'form'} do |f|
+    .box-body
+      .form-group
+        label for="data_bundle_name" DataBundle name
+        = f.text_field :name, class: 'form-control'
+      .form-group
+        label for="data_bundle_file"  File input
+        = f.file_field :file
+        /= f.remote_file_url
+    .box-footer
+      = f.submit 'Save', id: 'save_data_bundle', class: 'btn btn-primary'

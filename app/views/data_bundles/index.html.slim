@@ -1,23 +1,30 @@
-h1 Listing data_bundles
+.row
+  - if user_signed_in?
+    .col-xs-6
+      .box
+        .box-header
+          h3.box-title Databundles
+        .box-body.table-responsive.no-padding
+          table.table.table-hover
+            tbody
+              tr
+                th Name
+                th Date
+                th Donwload
+                th Links
+              - @data_bundles.each do |data_bundle|
+                tr
+                  td
+                    = data_bundle.name
+                  td
+                    = data_bundle.created_at.strftime('%d-%m-%Y %H:%M')
+                  td
+                    = link_to data_bundle.file_identifier, data_bundle.file.url
+                  td
+                    = link_to 'Show', data_bundle
+                    = link_to 'Edit', edit_data_bundle_path(data_bundle)
+                    = link_to 'Destroy', data_bundle, data: {confirm: 'Are you sure?'}, method: :delete
+    .col-xs-5
+      = render partial: 'form'
+  - else
 
-table
-  thead
-    tr
-      th File
-      th User
-      th
-      th
-      th
-
-  tbody
-    - @data_bundles.each do |data_bundle|
-      tr
-        td = data_bundle.name
-        td = data_bundle.user_id
-        td = link_to 'Show', data_bundle
-        td = link_to 'Edit', edit_data_bundle_path(data_bundle)
-        td = link_to 'Destroy', data_bundle, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= render partial: 'form'
