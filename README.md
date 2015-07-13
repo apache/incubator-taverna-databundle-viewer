@@ -35,7 +35,7 @@ You can see working prototype there: [DataBundleViewer](http://databundle.heroku
 
 ## License
 
-(c) 2015 Apache Software Foundation
+(c) 2014-2015 Apache Software Foundation
 
 This product includes software developed at The [Apache Software
 Foundation](http://www.apache.org/).
