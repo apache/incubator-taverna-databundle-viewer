@@ -28,16 +28,7 @@ class DataBundlesController < ApplicationController
 
   # GET /data_bundles/1
   def show
-    tmp_file = Tempfile.new('bundle', Rails.root.join('tmp'), encoding: 'ascii-8bit')
-    tmp_file.write(open(@data_bundle.file.url).read)
-    bundle_file = ROBundle::File.open(tmp_file.path)
-    manifest = JSON.parse(bundle_file.find_entry('.ro/manifest.json').get_input_stream.read)
-
-    inputs = manifest['aggregates'].select { |files| files['folder'] == '/inputs/' }.first
-    outputs = manifest['aggregates'].select { |files| files['folder'] == '/outputs/' }.first
-    @input_file_content = bundle_file.find_entry(inputs['file'].sub(/^\//, "")).get_input_stream.read unless inputs.nil?
-    @output_file_content = bundle_file.find_entry(outputs['file'].sub(/^\//, "")).get_input_stream.read unless outputs.nil?
-    tmp_file.unlink
+    @data_bundle = @data_bundle.decorate
   end
 
   # GET /data_bundles/1/edit
