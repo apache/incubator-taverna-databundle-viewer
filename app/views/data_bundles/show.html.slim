@@ -1,18 +1,21 @@
-p#notice = notice
+section.content-header
+  h1
+    = "DataBundle #{@data_bundle.name}"
+section.content
+  .box.box-default
+    .box-body
+      table.table.table-bordered
+        tbody
+          tr
+            th Field
+            th Value
+          tr
+            td Inputs
+            td
+              = @data_bundle.inputs
+          tr
+            td Outputs
+            td
+              = @data_bundle.outputs
 
-p
-  strong File:
-  - unless @input_file_content.nil?
-    = @input_file_content
-  - unless @output_file_content.nil?
-    = @output_file_content
-p
-  strong File:
-  = @data_bundle.name
-p
-  strong User:
-  = @data_bundle.user_id
-
-= link_to 'Edit', edit_data_bundle_path(@data_bundle)
-'|
-= link_to 'Back', data_bundles_path
+  = link_to 'Back', data_bundles_path
