@@ -20,6 +20,6 @@
 FactoryGirl.define do
   factory :data_bundle do
     association :user
-    name Faker::Lorem.sentence
+    name { Faker::Lorem.sentence }
   end
 end

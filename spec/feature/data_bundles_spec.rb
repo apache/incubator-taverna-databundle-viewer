@@ -20,12 +20,6 @@
 require 'spec_helper'
 
 RSpec.describe 'DataBundles', type: :feature do
-  it 'link from index page' do
-    visit root_path
-    click_link 'open_data_bundles'
-    expect(current_path).to eq data_bundles_path
-  end
-
   context 'signed in user' do
     let(:user) { create :user }
     let!(:data_bundle) { create :data_bundle, user: user }
@@ -42,6 +36,7 @@ RSpec.describe 'DataBundles', type: :feature do
         fill_in 'data_bundle_name', with: name
         click_button 'save_data_bundle'
       }.to change(DataBundle, :count).by(1)
+      visit data_bundles_path
       expect(page).to have_content name
     end
 
@@ -53,7 +48,7 @@ RSpec.describe 'DataBundles', type: :feature do
       expect(page).not_to have_content data_bundle_foreign.name
     end
 
-    it 'show databundle' do
+    xit 'show databundle' do
       visit data_bundle_path(data_bundle)
       expect(page).to have_content data_bundle.name
     end
