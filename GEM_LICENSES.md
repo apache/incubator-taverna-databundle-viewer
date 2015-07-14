@@ -56,5 +56,10 @@ pg - BSD https://github.com/ged/ruby-pg/blob/master/BSDL and https://github.com/
 
 quiet_assets - Dual licensed under the MIT or GPL licenses, https://github.com/evrone/quiet_assets/blob/master/LICENSE
 
+Ro-bundle - BSD, https://github.com/myGrid/ruby-ro-bundle/blob/master/Licence.rdoc
+
+Fog - MIT, https://github.com/fog/fog/blob/master/LICENSE.md
+
+Draper - MIT, https://github.com/drapergem/draper/blob/master/LICENSE
 
 Also in project installed bootstrap theme (https://github.com/almasaeed2010/AdminLTE) with the MIT license https://github.com/almasaeed2010/AdminLTE#license
