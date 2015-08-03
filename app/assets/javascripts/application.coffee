@@ -29,8 +29,8 @@
 # about supported directives.
 #
 #= require jquery2.min.js
-#= require bootstrap.min
-#= require icheck.min
+#= require bootstrap_theme/bootstrap/js/bootstrap.min
+#= require bootstrap_theme/plugins/iCheck/icheck.min
 
 $ ->
   $('input').iCheck

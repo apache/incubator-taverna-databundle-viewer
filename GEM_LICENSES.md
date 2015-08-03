@@ -64,4 +64,4 @@ Draper - MIT, https://github.com/drapergem/draper/blob/master/LICENSE
 
 Bower-rails - MIT, https://github.com/rharriso/bower-rails/blob/master/MIT-LICENSE
 
-Also in project installed bootstrap theme (https://github.com/almasaeed2010/AdminLTE) with the MIT license https://github.com/almasaeed2010/AdminLTE#license
+Bootstrap theme (https://github.com/almasaeed2010/AdminLTE) with the MIT license https://github.com/almasaeed2010/AdminLTE#license

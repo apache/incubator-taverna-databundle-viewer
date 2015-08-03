@@ -29,8 +29,8 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
-  *= require bootstrap.min
-  *= require AdminLTE.min
-  *= require skin-blue.min
-  *= require blue
+  *= require bootstrap_theme/bootstrap/css/bootstrap.min
+  *= require bootstrap_theme/dist/css/AdminLTE.min
+  *= require bootstrap_theme/dist/css/skins/skin-blue.min
+  *= require bootstrap_theme/plugins/iCheck/all
  */

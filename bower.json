@@ -1,0 +1,8 @@
+{
+  "vendor": {
+    "name": "UI",
+    "dependencies": {
+      "bootstrap_theme": "almasaeed2010/AdminLTE"
+    }
+  }
+}
