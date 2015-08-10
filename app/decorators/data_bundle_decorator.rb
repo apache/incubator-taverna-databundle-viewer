@@ -20,32 +20,24 @@
 class DataBundleDecorator < Draper::Decorator
   delegate_all
 
+  FILE_TYPES = {
+      inputs: '/inputs/',
+      intermediates: '/intermediates/',
+      outputs: '/outputs/'
+  }
+
+  FILE_TYPES.each do |type_key, type_name|
+    define_method :"#{type_key}" do
+      manifest['aggregates'].select { |files| files['folder'].start_with?(type_name) }
+    end
+  end
+
   def manifest
     if @manifest.nil?
-      tmp_file = Tempfile.new('bundle', Rails.root.join('tmp'), encoding: 'ascii-8bit')
-      tmp_file.write(open(object.file.url).read)
-      @bundle_file = ROBundle::File.open(tmp_file.path)
-      @manifest = JSON.parse(@bundle_file.find_entry('.ro/manifest.json').get_input_stream.read)
+      file = File.new("#{object.file.root}/#{object.file.store_dir}/#{DataBundle::EXTRACTED_PATH}/.ro/manifest.json", 'r')
+      @manifest = JSON.parse(file.read)
     end
 
     @manifest
-  end
-
-  def inputs
-    inputs = manifest['aggregates'].select { |files| files['folder'] == '/inputs/' }.first
-    if inputs.nil?
-      ''
-    else
-      @bundle_file.find_entry(inputs['file'].sub(/^\//, '')).get_input_stream.read
-    end
-  end
-
-  def outputs
-    outputs = manifest['aggregates'].select { |files| files['folder'] == '/outputs/' }.first
-    if outputs.nil?
-      ''
-    else
-      @bundle_file.find_entry(outputs['file'].sub(/^\//, '')).get_input_stream.read
-    end
   end
 end
