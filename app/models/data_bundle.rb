@@ -23,4 +23,7 @@ class DataBundle < ActiveRecord::Base
   belongs_to :user
 
   validates :user_id, presence: true
+
+  EXTRACTED_PATH = 'extracted_source'
+  EXTRACTED_WORKFLOW_PATH = 'workflow_source'
 end

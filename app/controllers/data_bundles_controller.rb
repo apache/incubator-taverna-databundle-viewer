@@ -40,6 +40,14 @@ class DataBundlesController < ApplicationController
     @data_bundle = current_user.databundles.new(data_bundle_params)
 
     if @data_bundle.save
+      Archive::Zip.extract(
+          @data_bundle.file.path,
+          "#{@data_bundle.file.root}/#{@data_bundle.file.store_dir}/#{DataBundle::EXTRACTED_PATH}"
+      )
+      Archive::Zip.extract(
+          "#{@data_bundle.file.root}/#{@data_bundle.file.store_dir}/#{DataBundle::EXTRACTED_PATH}/workflow.wfbundle",
+          "#{@data_bundle.file.root}/#{@data_bundle.file.store_dir}/#{DataBundle::EXTRACTED_PATH}/#{DataBundle::EXTRACTED_WORKFLOW_PATH}",
+      )
       redirect_to @data_bundle, notice: 'Data bundle was successfully created.'
     else
       render :edit
