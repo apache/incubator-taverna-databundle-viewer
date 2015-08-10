@@ -38,6 +38,8 @@ gem 'fog'
 gem 'draper'
 
 gem 'ro-bundle'
+gem 'taverna-t2flow'
+gem 'archive-zip'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
