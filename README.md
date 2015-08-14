@@ -70,31 +70,59 @@ before accepting a larger contribution.
 
 # Building and install requirements
 
-1. Install Ruby 2.2.1. With using rvm - `rvm install 2.2.1`
-2. Run `bin/setup` to install dependencies, create and set up database. By default used PostgreSQL
-3. Run server with command `rails s`
+**Requirements**
 
-For using omniauth you need set up environmental variables FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET.
+* [rvm](https://rvm.io/rvm/install)
+* ruby, installed with rvm (`rvm install 2.2.1`)
+* [node](http://nodejs.org) ([on github](https://github.com/joyent/node))
+* [bower](https://github.com/bower/bower) (>= 0.10.0) installed with npm
 
-For Google omniauth:
+**Set up**
+
+1. Run `bin/setup` to install dependencies, create and set up database. By default used PostgreSQL
+2. Run `rake bower:install`  to install front-end assets
+
+**Set up omniauth**
+
+Google omniauth:
 
 1. Visit [Console google](https://console.developers.google.com/). Click by link `APIs & auth` -> `Credentials` -> `Create new Client ID`
 2. Set Redirect URIs as http://yoursite.com/users/auth/google_oauth2/callback
 3. Enable Google+ API. Click by link `APIs & auth` -> `Google+ API` -> `Enable API`
+4. Set up environmental variables  GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET
 
-For Facebook omniauth:
+Facebook omniauth:
 
 1. Visit [Developers Facebook](https://developers.facebook.com/)
 2. Click by `My Apps` -> `Add a New App`
 3. Visit `Settings` -> `Advanced`. Fill in field `Valid OAuth redirect URIs` with http://yoursite.com/users/auth/facebook/callback
+4. Set up environmental variables FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET
 
+**Set up the AWS S3 for storage files in production environment**
 
-_TODO_
+1. Visit [AWS Console](https://aws.amazon.com/)
+2. Open the Amazon S3 console.
+3. Click Create Bucket.
+4. In the Create a Bucket dialog box enter a name and select a region.
+5. Click on the name of your account (it is located in the top right corner of the console). Then, in the expanded drop-down list, select Security Credentials.
+6. Click the Get Started with IAM Users button.
+7. Click the Create New Users
+8. Enter User Name(s) and click the Create
+9. Click the Download Credentials
+10. Set up environmental variables S3_KEY, S3_SECRET, S3_REGION, S3_ASSET_URL, S3_BUCKET_NAME
 
-* ...
+**Ways to set up environmental variables**
+
+1. Set Unix Environment Variables
+2. Use a local .env file. Template you can find in .env.example file
+3. Set environmental variables as parameters to command `rails s`
+
+Don't forget: Keeping Environment Variables Private
 
 
 # Usage
+
+Run server with command `rails s`
 
 _TODO_
 
