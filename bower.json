@@ -2,7 +2,8 @@
   "vendor": {
     "name": "UI",
     "dependencies": {
-      "bootstrap_theme": "almasaeed2010/AdminLTE"
+      "bootstrap_theme": "almasaeed2010/AdminLTE",
+      "d3": "3.5.6"
     }
   }
 }
