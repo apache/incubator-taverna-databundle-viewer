@@ -40,4 +40,15 @@ class DataBundleDecorator < Draper::Decorator
 
     @manifest
   end
+
+  def workflow
+    if @workflow.nil?
+      manifest = Nokogiri::XML(File.open("#{object.file.root}/#{object.file.store_dir}/#{DataBundle::EXTRACTED_PATH}/#{DataBundle::EXTRACTED_WORKFLOW_PATH}/META-INF/manifest.xml"))
+      t2flow_name = manifest.xpath('//manifest:file-entry[@manifest:media-type="application/vnd.taverna.t2flow+xml"][@manifest:size]').first['manifest:full-path']
+      file = File.open("#{object.file.root}/#{object.file.store_dir}/#{DataBundle::EXTRACTED_PATH}/#{DataBundle::EXTRACTED_WORKFLOW_PATH}/#{t2flow_name}")
+      @workflow = T2Flow::Parser.new.parse(file)
+    end
+
+    @workflow
+  end
 end
