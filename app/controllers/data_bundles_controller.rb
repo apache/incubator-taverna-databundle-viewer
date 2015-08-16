@@ -27,6 +27,7 @@ class DataBundlesController < ApplicationController
   end
 
   # GET /data_bundles/1
+  # GET /data_bundles/1.json
   def show
     @data_bundle = @data_bundle.decorate
   end

@@ -4,6 +4,7 @@ section.content-header
 section.content
   .box.box-default
     .box-body
+      #d3_visualization
       table.table.table-bordered
         tbody
           tr
@@ -14,8 +15,13 @@ section.content
             td
               = @data_bundle.inputs
           tr
+            td Intermediates
+            td
+              = @data_bundle.intermediates
+          tr
             td Outputs
             td
               = @data_bundle.outputs
-
   = link_to 'Back', data_bundles_path
+
+#data_bundle data-url=data_bundle_url(@data_bundle, format: :json)
