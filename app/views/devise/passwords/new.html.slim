@@ -1,11 +1,23 @@
-h2
-  | Forgot your password?
-= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-  = devise_error_messages!
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true
-  .actions
-    = f.submit "Send me reset password instructions"
-= render "devise/shared/links"
+body.login-page
+  .login-box
+    .login-logo
+      = link_to root_path do
+        b
+          | DatabundleViewer
+    .login-box-body
+      p.login-box-msg
+        | Forgot your password?
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: {method: :post}) do |f|
+        - unless flash.alert.nil?
+          .alert.alert-danger.alert-dismissable
+            button.close aria-hidden="true" data-dismiss="alert" type="button"  ×
+            h5
+              i.icon.fa.fa-ban
+              = flash.alert
+        .form-group.has-feedback
+          = f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email'
+          span.glyphicon.glyphicon-envelope.form-control-feedback
+        .row
+          .col-xs-10
+            = f.submit 'Send me reset password instructions', class: 'btn btn-primary btn-block btn-flat', id: 'reset_password'
+      = render 'devise/shared/links'
