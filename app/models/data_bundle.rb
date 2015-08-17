@@ -18,6 +18,7 @@
 #
 
 class DataBundle < ActiveRecord::Base
+  paginates_per 10
   mount_uploader :file, ::DataBundleUploader
 
   belongs_to :user

@@ -22,8 +22,10 @@ class DataBundlesController < ApplicationController
 
   # GET /data_bundles
   def index
-    @data_bundles = current_user.databundles if user_signed_in?
-    @data_bundle = DataBundle.new
+    if user_signed_in?
+      @data_bundles = current_user.databundles.page(params[:page])
+      @data_bundle = DataBundle.new
+    end
   end
 
   # GET /data_bundles/1

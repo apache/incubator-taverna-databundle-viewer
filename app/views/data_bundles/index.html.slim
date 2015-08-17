@@ -26,7 +26,11 @@ section.content
                       = link_to 'Show', data_bundle
                       = link_to 'Edit', edit_data_bundle_path(data_bundle)
                       = link_to 'Destroy', data_bundle, data: {confirm: 'Are you sure?'}, method: :delete
+            = paginate @data_bundles
       .col-xs-5
         = render partial: 'form'
     - else
-
+      .col-xs-6
+        .box
+          .box-body
+            | For use the databundle viewer you must be logged in
