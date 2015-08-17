@@ -34,7 +34,7 @@ class DataBundleDecorator < Draper::Decorator
 
   def manifest
     if @manifest.nil?
-      file = File.new("#{object.file.root}/#{object.file.store_dir}/#{DataBundle::EXTRACTED_PATH}/.ro/manifest.json", 'r')
+      file = File.new("#{object.file_path}.ro/manifest.json", 'r')
       @manifest = JSON.parse(file.read)
     end
 
@@ -43,9 +43,9 @@ class DataBundleDecorator < Draper::Decorator
 
   def workflow
     if @workflow.nil?
-      manifest = Nokogiri::XML(File.open("#{object.file.root}/#{object.file.store_dir}/#{DataBundle::EXTRACTED_PATH}/#{DataBundle::EXTRACTED_WORKFLOW_PATH}/META-INF/manifest.xml"))
+      manifest = Nokogiri::XML(File.open("#{object.file_path}#{DataBundle::EXTRACTED_WORKFLOW_PATH}/META-INF/manifest.xml"))
       t2flow_name = manifest.xpath('//manifest:file-entry[@manifest:media-type="application/vnd.taverna.t2flow+xml"][@manifest:size]').first['manifest:full-path']
-      file = File.open("#{object.file.root}/#{object.file.store_dir}/#{DataBundle::EXTRACTED_PATH}/#{DataBundle::EXTRACTED_WORKFLOW_PATH}/#{t2flow_name}")
+      file = File.open("#{object.file_path}#{DataBundle::EXTRACTED_WORKFLOW_PATH}/#{t2flow_name}")
       @workflow = T2Flow::Parser.new.parse(file)
     end
 

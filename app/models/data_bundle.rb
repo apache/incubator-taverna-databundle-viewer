@@ -25,6 +25,10 @@ class DataBundle < ActiveRecord::Base
 
   validates :user_id, presence: true
 
-  EXTRACTED_PATH = 'extracted_source'
+  EXTRACTED_DIRECTORY = 'extracted_source'
   EXTRACTED_WORKFLOW_PATH = 'workflow_source'
+
+  def file_path
+    "#{file.root}/#{file.store_dir}/#{EXTRACTED_DIRECTORY}/"
+  end
 end
