@@ -27,4 +27,8 @@ RSpec.describe DataBundle, type: :model do
   it 'without user - invalid' do
     expect(build(:data_bundle, user: nil)).not_to be_valid
   end
+
+  it 'without file - invalid' do
+    expect(build(:data_bundle, file: nil)).not_to be_valid
+  end
 end

@@ -21,5 +21,6 @@ FactoryGirl.define do
   factory :data_bundle do
     association :user
     name { Faker::Lorem.sentence }
+    file { Rack::Test::UploadedFile.new("#{Rails.root}/spec/fixtures/hello_anyone.zip") }
   end
 end

@@ -34,6 +34,7 @@ RSpec.describe 'DataBundles', type: :feature do
       name = Faker::Lorem.sentence
       expect {
         fill_in 'data_bundle_name', with: name
+        attach_file 'data_bundle_file', "#{Rails.root}/spec/fixtures/hello_anyone.zip"
         click_button 'save_data_bundle'
       }.to change(DataBundle, :count).by(1)
       visit data_bundles_path
@@ -48,9 +49,27 @@ RSpec.describe 'DataBundles', type: :feature do
       expect(page).not_to have_content data_bundle_foreign.name
     end
 
-    xit 'show databundle' do
-      visit data_bundle_path(data_bundle)
+    it 'show databundle' do
+      click_link "to_show_#{data_bundle.id}"
       expect(page).to have_content data_bundle.name
+    end
+
+    it 'edit databundle' do
+      click_link "to_edit_#{data_bundle.id}"
+      new_name = Faker::Lorem.sentence
+      expect {
+        fill_in 'data_bundle_name', with: new_name
+        click_button 'save_data_bundle'
+      }.not_to change(DataBundle, :count)
+      expect(page).to have_content new_name
+    end
+
+    it 'delete databundle', js: true do
+      expect {
+        page.accept_confirm do
+          click_link "to_delete_#{data_bundle.id}"
+        end
+      }.to change(DataBundle, :count).by(-1)
     end
   end
 
