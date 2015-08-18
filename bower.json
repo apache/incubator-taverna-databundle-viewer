@@ -1,10 +1,7 @@
 {
-  "name": "UI",
-  "vendor": {
-    "name": "UI vendor",
-    "dependencies": {
-      "bootstrap_theme": "almasaeed2010/AdminLTE",
-      "d3": "3.5.6"
-    }
+  "name": "data-bundle_viewer",
+  "dependencies": {
+    "bootstrap_theme": "almasaeed2010/AdminLTE",
+    "d3": "3.5.6"
   }
 }

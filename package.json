@@ -1,0 +1,14 @@
+{
+  "name": "databundle-viewer",
+  "version": "1.0.0",
+  "dependencies": {
+    "bower": "1.4.x"
+  },
+  "engine": {
+    "node": "0.11.x",
+    "npm": "2.1.x"
+  },
+  "scripts": {
+    "postinstall": "bower install"
+  }
+}
