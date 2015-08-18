@@ -19,7 +19,6 @@
 
 Rails.application.routes.draw do
   resources :data_bundles, except: [:new]
-  get 'welcome/index'
 
   root 'data_bundles#index'
   devise_for :users, controllers: {omniauth_callbacks: 'callbacks'}
