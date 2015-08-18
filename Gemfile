@@ -36,7 +36,8 @@ gem 'draper'
 # A Ruby library for working with Research Object Bundle files
 gem 'ro-bundle'
 # A Ruby library to aid the interaction with Taverna 2 workflows
-gem 'taverna-t2flow'
+gem 'workflow_parser', github: 'myExperiment/workflow_parser'
+gem 'taverna-t2flow', github: 'myExperiment/workflow_parser-t2flow'
 # A simple interface to working with ZIP archives
 gem 'archive-zip'
 # Paginator
