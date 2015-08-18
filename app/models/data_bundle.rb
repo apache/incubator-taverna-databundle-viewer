@@ -23,12 +23,19 @@ class DataBundle < ActiveRecord::Base
 
   belongs_to :user
 
-  validates :user_id, presence: true
+  validates :user_id, :file, presence: true
+
+  after_create :extract_file
 
   EXTRACTED_DIRECTORY = 'extracted_source'
   EXTRACTED_WORKFLOW_PATH = 'workflow_source'
 
   def file_path
     "#{file.root}/#{file.store_dir}/#{EXTRACTED_DIRECTORY}/"
+  end
+
+  def extract_file
+    Archive::Zip.extract(file.path, "#{file_path}")
+    Archive::Zip.extract("#{file_path}workflow.wfbundle", "#{file_path}#{DataBundle::EXTRACTED_WORKFLOW_PATH}")
   end
 end
