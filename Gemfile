@@ -41,6 +41,8 @@ gem 'taverna-t2flow'
 gem 'archive-zip'
 # Paginator
 gem 'kaminari'
+# Loads environment variables from `.env`
+gem 'dotenv-rails'
 
 group :development, :test do
   # More useful error page
