@@ -4,24 +4,27 @@ section.content-header
 section.content
   .box.box-default
     .box-body
-      #d3_visualization
       table.table.table-bordered
         tbody
           tr
-            th Field
-            th Value
-          tr
-            td Inputs
+            td Workflow name
             td
-              = @data_bundle.inputs
+              = @data_bundle.workflow.annotations.name
           tr
-            td Intermediates
+            td Authors
             td
-              = @data_bundle.intermediates
+              = @data_bundle.workflow.annotations.authors.join(' ')
           tr
-            td Outputs
+            td Titles
             td
-              = @data_bundle.outputs
+              = @data_bundle.workflow.annotations.titles.join(' ')
+          tr
+            td Description
+            td
+              = @data_bundle.workflow.annotations.descriptions.join(' ')
+          tr
+            td Semantic annotation
+            td
+              = @data_bundle.workflow.annotations.semantic_annotation
+      svg#graphContainer
   = link_to 'Back', data_bundles_path
-
-#data_bundle data-url=data_bundle_url(@data_bundle, format: :json)
