@@ -29,6 +29,7 @@
 # about supported directives.
 #
 #= require jquery2.min.js
+#= require jquery_ujs
 #= require bootstrap_theme/bootstrap/js/bootstrap.min
 #= require d3/d3.min
 #= require data_bundle

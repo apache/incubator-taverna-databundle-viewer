@@ -1,8 +1,12 @@
-h1 Editing data_bundle
-
-== render 'form'
+section.content-header
+  h1
+    | Editing DataBundle
+section.content
+  .row
+    .col-xs-12
+      .box.box-primary
+        = render partial: 'form'
 
 = link_to 'Show', @data_bundle
 '|
 = link_to 'Back', data_bundles_path
-

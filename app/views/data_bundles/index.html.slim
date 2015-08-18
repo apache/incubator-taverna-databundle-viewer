@@ -4,7 +4,7 @@ section.content-header
 section.content
   .row
     - if user_signed_in?
-      .col-xs-6
+      .col-xs-7
         .box
           .box-body.table-responsive.no-padding
             table.table.table-hover
@@ -23,12 +23,17 @@ section.content
                     td
                       = link_to data_bundle.file_identifier, data_bundle.file.url
                     td
-                      = link_to 'Show', data_bundle
-                      = link_to 'Edit', edit_data_bundle_path(data_bundle)
-                      = link_to 'Destroy', data_bundle, data: {confirm: 'Are you sure?'}, method: :delete
+                      = link_to 'Show', data_bundle, id: "to_show_#{data_bundle.id}"
+                    td
+                      = link_to 'Edit', edit_data_bundle_path(data_bundle), id: "to_edit_#{data_bundle.id}"
+                    td
+                      = link_to 'Destroy', data_bundle_path(data_bundle), method: :delete, data: {confirm: 'Are you sure?'}, id: "to_delete_#{data_bundle.id}"
             = paginate @data_bundles
       .col-xs-5
-        = render partial: 'form'
+        .box.box-primary
+          .box-header.with-border
+            h3.box-title New Databundle
+          = render partial: 'form'
     - else
       .col-xs-6
         .box
