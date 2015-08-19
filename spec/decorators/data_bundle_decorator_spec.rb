@@ -20,4 +20,25 @@
 require 'spec_helper'
 
 describe DataBundleDecorator do
+  let(:data_bundle) { create(:data_bundle).decorate }
+
+  it '#inputs' do
+    expected_result = Hash.new
+    expected_result['name'] = 'Denis'
+    expect(data_bundle.inputs).to include expected_result
+  end
+
+  it '#intermediates' do
+    expected_result = Hash.new
+    expected_result['2d812fc1-dfec-42cb-bef9-87b3ce9c9e2d'] = 'Hello, '
+
+    expect(data_bundle.intermediates).to include expected_result
+  end
+
+  it '#outputs' do
+    expected_result = Hash.new
+    expected_result['greeting'] = 'Hello, Denis'
+
+    expect(data_bundle.outputs).to include expected_result
+  end
 end

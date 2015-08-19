@@ -28,8 +28,18 @@ class DataBundleDecorator < Draper::Decorator
 
   FILE_TYPES.each do |type_key, type_name|
     define_method :"#{type_key}" do
-      manifest['aggregates'].select { |files| files['folder'].start_with?(type_name) }
+      files = manifest['aggregates'].select { |files| files['folder'].start_with?(type_name) }
+      result = {}
+      files.each do |file|
+        key = file['file'].split('/').last.split('.').first
+        result[key] = file_content(file['file'])
+      end
+      return result
     end
+  end
+
+  def file_content(file)
+    File.new("#{object.file_path}#{file}", 'r').read
   end
 
   def manifest
@@ -50,5 +60,29 @@ class DataBundleDecorator < Draper::Decorator
     end
 
     @workflow
+  end
+
+  def to_json
+    stream = []
+    workflow.datalinks.each { |link| stream << write_link(link, workflow) }
+    stream
+  end
+
+  def write_link(link, dataflow)
+    stream = {}
+    if dataflow.sources.select { |s| s.name == link.source } != []
+      stream[:source] = link.source
+      stream[:file_content] = inputs[link.source] unless inputs[link.source].nil?
+    else
+      processor = dataflow.processors.select { |p| p.name == link.source.split(':')[0] }[0]
+      stream[:source] = processor.name
+    end
+    if dataflow.sinks.select { |s| s.name == link.sink } != []
+      stream[:target] = link.sink
+    else
+      processor = dataflow.processors.select { |p| p.name == link.sink.split(':')[0] }[0]
+      stream[:target] = processor.name
+    end
+    stream
   end
 end
