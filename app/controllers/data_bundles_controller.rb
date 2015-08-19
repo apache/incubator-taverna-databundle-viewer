@@ -32,6 +32,10 @@ class DataBundlesController < ApplicationController
   # GET /data_bundles/1.json
   def show
     @data_bundle = @data_bundle.decorate
+    respond_to do |format|
+      format.html
+      format.json { render json: @data_bundle.to_json }
+    end
   end
 
   # GET /data_bundles/1/edit

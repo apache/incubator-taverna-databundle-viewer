@@ -17,48 +17,55 @@
 # under the License.
 #
 
-margin =
-  top: 0
-  right: 320
-  bottom: 0
-  left: 0
-width = 960 - (margin.left) - (margin.right)
-height = 500 - (margin.top) - (margin.bottom)
-
 @draw_workflow = ->
-  tree = d3.layout.tree().separation((a, b) ->
-    if a.parent == b.parent then 1 else .5
-  ).children((d) ->
-    d.parents
-  ).size([
-      height
-      width
-    ])
+  if $('svg#graphContainer').length > 0
+    d3.json $('#data_bundle').attr('data-url'), (error, links) ->
+      tick = ->
+        path.attr 'd', (d) ->
+          dx = d.target.x - (d.source.x)
+          dy = d.target.y - (d.source.y)
+          dr = Math.sqrt(dx * dx + dy * dy)
+          'M' + d.source.x + ',' + d.source.y + 'A' + dr + ',' + dr + ' 0 0,1 ' + d.target.x + ',' + d.target.y
+        node.attr 'transform', (d) ->
+          'translate(' + d.x + ',' + d.y + ')'
+        return
 
-  svg = d3.select('#d3_visualization').append('svg').attr('width', width + margin.left + margin.right).attr('height',
-    height +
-      margin.top + margin.bottom).append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+      nodes = {}
+      links.forEach (link) ->
+        link.source = nodes[link.source] or (nodes[link.source] =
+            name: link.source, file_content: link.file_content)
+        link.target = nodes[link.target] or (nodes[link.target] =
+            name: link.target, file_content: link.file_content)
+        link.value = +link.value
+        return
 
-  d3.json $('#data_bundle').attr('data-url'), (error, json) ->
-    if error
-      throw error
+      width = 960
+      height = 900
 
-    nodes = tree.nodes(json)
-    link = svg.selectAll('.link').data(tree.links(nodes)).enter().append('path').attr('class', 'link').attr('d', elbow)
-    node = svg.selectAll('.node').data(nodes).enter().append('g').attr('class', 'node').attr('transform', (d) ->
-      'translate(' + d.y + ',' + d.x + ')')
-    node.append('text').attr('class', 'name').attr('x', 8).attr('y', -6).text (d) ->
-      d.name
-    node.append('svg:title').text((d) -> "Click for see template")
+      force = d3.layout.force().nodes(d3.values(nodes)).links(links).size([width, height])
+      .linkDistance(100).charge(-500).on('tick', tick).start()
+      svgContainer = d3.select('svg#graphContainer').attr('width', width).attr('height', height)
+      # build the arrow.
+      svgContainer.append('svg:defs').selectAll('marker').data(['end']).enter().append('svg:marker').attr('id', String)
+      .attr('viewBox', '0 -5 10 10').attr('refX', 15).attr('refY', -1.5).attr('markerWidth', 6)
+      .attr('markerHeight', 6).attr('orient', 'auto').append('svg:path').attr 'd', 'M0,-5L10,0L0,5'
+      # add the links and the arrows
+      path = svgContainer.append('svg:g').selectAll('path').data(force.links()).enter().append('svg:path')
+      .attr('class', 'link').attr('marker-end', 'url(#end)')
+      # define the nodes
+      node = svgContainer.selectAll('.node').data(force.nodes()).enter().append('g').attr('class', 'node')
+      .attr('id', (d) -> d.name).call(force.drag)
+      # add the nodes
+      node.append('circle').attr('r', 5)
+      # add the text
+      node.append('text').attr('x', 12).attr('dy', '.35em').text (d) ->
+        d.name
+      node.append('text').attr('class', 'file_content').attr('visibility', 'hidden').text (d) ->
+        return d.file_content
 
-    node.append('text').attr('x', 8).attr('y', 8).attr('dy', '.71em').attr('class', 'about lifespan')
-    .on "click", (d) ->
-      console.log("click on file name")
-    .html (d) ->
-      $.map(d.inputs, (val, i) ->
-        return val.file
-      ).join(', ')
-  return
-
-elbow = (d, i) ->
-  'M' + d.source.y + ',' + d.source.x + 'H' + d.target.y + 'V' + d.target.x + (if d.target.children then '' else 'h' + margin.right)
+      node.on 'click', (d) ->
+        rect = svgContainer.append('rect').transition().duration(500).attr('width', 250)
+        .attr('height', 300).attr('x', 10).attr('y', 10).style('fill', 'white').attr('stroke', 'black')
+        text = svgContainer.append('text').text(d.file_content)
+        .attr('x', 50).attr('y', 150).attr('fill', 'black')
+      return

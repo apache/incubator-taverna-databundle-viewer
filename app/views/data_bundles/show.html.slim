@@ -2,6 +2,7 @@ section.content-header
   h1
     = "DataBundle #{@data_bundle.name}"
 section.content
+  = link_to '<- Back', data_bundles_path
   .box.box-default
     .box-body
       table.table.table-bordered
@@ -27,4 +28,4 @@ section.content
             td
               = @data_bundle.workflow.annotations.semantic_annotation
       svg#graphContainer
-  = link_to 'Back', data_bundles_path
+#data_bundle data-url=data_bundle_url(@data_bundle, format: :json)

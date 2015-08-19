@@ -18,18 +18,28 @@
 */
 
 svg {
-  .name {
-    font-weight: bold;
-  }
-
-  .about {
-    fill: #777;
-    font-size: smaller;
-  }
-
-  .link {
+  path.link {
     fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
+    stroke: #666;
+    stroke-width: 1.5px;
+  }
+
+  circle {
+    fill: #ccc;
+    stroke: #fff;
+    stroke-width: 1.5px;
+  }
+
+  text {
+    fill: #000;
+    font: 10px sans-serif;
+    pointer-events: none;
+  }
+
+  rect {
+    fill: #585858;
+  }
+  .fill_text {
+    fill: red !important;
   }
 }
