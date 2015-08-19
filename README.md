@@ -122,14 +122,52 @@ Don't forget: Keeping Environment Variables Private
 
 # Usage
 
-Run server with command `rails s`
+**In development environment**
 
-_TODO_
+1. Run server with command `rails s`
+2. Open in the browser a address `http://localhost:3000`
 
-* ...
+**In production environment**
+
+1. Run `rake assets:precompile`
+2. Run server with command `RAILS_ENV=production rails s`
+3. Open in the browser a address `http://localhost:3000`
+
+Also you can deploy this application to [Heroku](http://heroku.com/)
+
+For upload new databundle file, you need to be logged in.
+You may log in with your facebook or google account, or register in DataBundle viewer site.
+
+When you logged in, you can upload databundle file in box 'New Databundle'. Enter name for the databundle and choose file to upload.
+
+After click on 'Save' you will see information about workflow run:
+
+1. Workflow name
+2. Authors of the workflow
+3. Titles
+4. Description
+
+And also you will see dataflow diagram of workflow run. You can click on edges of the graph to see what value produced by this step
 
 # Documentation
 
-_TODO_
+Dependencies listed in [Gemfile](Gemfile) (gems) and in [bower.json](bower.json) (front-end assets)
 
-* ...
+Licenses to every dependency presented in [DEPENDENCY_LICENSES.md](DEPENDENCY_LICENSES.md) file
+
+Main classes of the application:
+
+1. [DataBundleDecorator](app/decorators/data_bundle_decorator.rb): access to data_bundle file as ro_bundle.
+Methods for get inputs/outputs/intermediates values
+
+2. [DataBundle](app/models/data_bundle.rb): necessary constants, and logic by extract data_bundle file after upload
+
+Visualization component in [data_bundle.coffee](app/assets/javascripts/data_bundle.coffee)
+
+# Todo
+
+1. Better visualization
+
+2. Show intermediates run results with taverna-prov
+
+3. Docker image with auto install dependencies and run server
