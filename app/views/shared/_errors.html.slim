@@ -1,0 +1,12 @@
+- if object.errors.any?
+  #error_explanation
+    .row
+      .col-md-12
+        .alert.alert-danger
+          .font100
+            h2.label.label-danger
+              | Errors
+            ol
+              - object.errors.full_messages.each do |msg|
+                li
+                  = msg

@@ -1,4 +1,5 @@
 = form_for @data_bundle, multipart: true, html: {role: 'form'} do |f|
+  = render partial: 'shared/errors', locals: {object: @data_bundle}
   .box-body
     .form-group
       label for="data_bundle_name" DataBundle name
