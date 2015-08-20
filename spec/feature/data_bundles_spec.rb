@@ -30,15 +30,25 @@ RSpec.describe 'DataBundles', type: :feature do
       visit data_bundles_path
     end
 
-    it 'can upload new databundles' do
-      name = Faker::Lorem.sentence
-      expect {
-        fill_in 'data_bundle_name', with: name
-        attach_file 'data_bundle_file', "#{Rails.root}/spec/fixtures/hello_anyone.zip"
-        click_button 'save_data_bundle'
-      }.to change(DataBundle, :count).by(1)
-      visit data_bundles_path
-      expect(page).to have_content name
+    context 'create' do
+      it 'with file and name - ok' do
+        name = Faker::Lorem.sentence
+        expect {
+          fill_in 'data_bundle_name', with: name
+          attach_file 'data_bundle_file', "#{Rails.root}/spec/fixtures/hello_anyone.zip"
+          click_button 'save_data_bundle'
+        }.to change(DataBundle, :count).by(1)
+        visit data_bundles_path
+        expect(page).to have_content name
+      end
+
+      it 'without file - error' do
+        expect {
+          click_button 'save_data_bundle'
+        }.not_to change(DataBundle, :count)
+        expect(current_path).to eq data_bundles_path
+        expect(page).to have_css 'div#error_explanation'
+      end
     end
 
     it 'can see the databundles' do
@@ -54,14 +64,28 @@ RSpec.describe 'DataBundles', type: :feature do
       expect(page).to have_content data_bundle.name
     end
 
-    it 'edit databundle' do
-      click_link "to_edit_#{data_bundle.id}"
-      new_name = Faker::Lorem.sentence
-      expect {
-        fill_in 'data_bundle_name', with: new_name
-        click_button 'save_data_bundle'
-      }.not_to change(DataBundle, :count)
-      expect(page).to have_content new_name
+    context 'edit' do
+      before do
+        click_link "to_edit_#{data_bundle.id}"
+      end
+
+      it 'change name - ok' do
+        new_name = Faker::Lorem.sentence
+        expect {
+          fill_in 'data_bundle_name', with: new_name
+          click_button 'save_data_bundle'
+        }.not_to change(DataBundle, :count)
+        expect(page).to have_content new_name
+      end
+
+      it 'with empty name - error' do
+        expect {
+          fill_in 'data_bundle_name', with: ''
+          click_button 'save_data_bundle'
+        }.not_to change(DataBundle, :count)
+        expect(page).to have_css 'div#error_explanation'
+        expect(current_path).to eq data_bundle_path(data_bundle.id)
+      end
     end
 
     it 'delete databundle', js: true do

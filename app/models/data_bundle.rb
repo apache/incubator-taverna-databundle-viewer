@@ -23,7 +23,7 @@ class DataBundle < ActiveRecord::Base
 
   belongs_to :user
 
-  validates :user_id, :file, presence: true
+  validates :name, :user_id, :file, presence: true
 
   after_create :extract_file
 
