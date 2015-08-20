@@ -74,15 +74,17 @@ class DataBundleDecorator < Draper::Decorator
       stream[:source] = link.source
       stream[:file_content] = inputs[link.source] unless inputs[link.source].nil?
     else
-      processor = dataflow.processors.select { |p| p.name == link.source.split(':')[0] }[0]
-      stream[:source] = processor.name
+      stream[:source] = processor_by_name(dataflow, link.source)
     end
     if dataflow.sinks.select { |s| s.name == link.sink } != []
       stream[:target] = link.sink
     else
-      processor = dataflow.processors.select { |p| p.name == link.sink.split(':')[0] }[0]
-      stream[:target] = processor.name
+      stream[:target] = processor_by_name(dataflow, link.sink)
     end
     stream
+  end
+
+  def processor_by_name(dataflow, name)
+    dataflow.processors.select { |p| p.name == name.split(':').first }.first.name
   end
 end
