@@ -20,15 +20,11 @@
 class DataBundleDecorator < Draper::Decorator
   delegate_all
 
-  FILE_TYPES = {
-      inputs: '/inputs/',
-      intermediates: '/intermediates/',
-      outputs: '/outputs/'
-  }
+  FILE_TYPES = {:inputs => '/inputs/' , :intermediates => '/intermediates/', :outputs => 'outputs'}
 
   FILE_TYPES.each do |type_key, type_name|
     define_method :"#{type_key}" do
-      files = manifest['aggregates'].select { |files| files['folder'].start_with?(type_name) }
+      files = manifest['aggregates'].select { |file| !file['folder'].nil? && file['folder'].start_with?(type_name) }
       result = {}
       files.each do |file|
         key = file['file'].split('/').last.split('.').first
@@ -53,6 +49,7 @@ class DataBundleDecorator < Draper::Decorator
 
   def workflow
     if @workflow.nil?
+
       manifest = Nokogiri::XML(File.open("#{object.file_path}#{DataBundle::EXTRACTED_WORKFLOW_PATH}/META-INF/manifest.xml"))
       t2flow_name = manifest.xpath('//manifest:file-entry[@manifest:media-type="application/vnd.taverna.t2flow+xml"][@manifest:size]').first['manifest:full-path']
       file = File.open("#{object.file_path}#{DataBundle::EXTRACTED_WORKFLOW_PATH}/#{t2flow_name}")
@@ -62,9 +59,48 @@ class DataBundleDecorator < Draper::Decorator
     @workflow
   end
 
-  def to_json
-    stream = []
-    workflow.datalinks.each { |link| stream << write_link(link, workflow) }
+  def to_dataHashObject
+    paths = []
+
+    workflow.datalinks.each do |link|
+      paths << write_link(link, workflow) 
+    end
+
+    stream = {}
+    nodes = []
+    links = []
+
+    paths.each do |path|
+      #get source node
+      source = {:name => path[:source] }
+      target = {:name => path[:target] }
+
+      indexSource = -1
+      indexTarget = -1
+
+      nodes.each_with_index do |node, index|
+        if node[:name].to_s == source[:name]
+          indexSource = index
+        elsif node[:name].to_s == target[:name]
+          indexTarget = index
+        end
+      end
+
+      if indexSource == -1
+        indexSource = nodes.count
+        nodes << source
+      end
+
+      if indexTarget == -1
+        indexTarget = nodes.count
+        nodes << target
+      end
+
+      links << {:source => indexSource, :target => indexTarget, :value => 50}
+
+    end
+
+    stream = {:nodes => nodes, :links => links }
     stream
   end
 
@@ -87,4 +123,40 @@ class DataBundleDecorator < Draper::Decorator
   def processor_by_name(dataflow, name)
     dataflow.processors.select { |p| p.name == name.split(':').first }.first.name
   end
+
+
+
+  # find the provenance file
+  # how to extract info from file see http://ruby-rdf.github.io/ , section Querying RDF data using basic graph patterns
+  def provenanceMain
+    
+    if @provenance.nil?
+
+      provenanceObj = Provenance.new("#{object.file_path}workflowrun.prov.ttl")
+      @provenance =  provenanceObj.to_dataHashObject("#{object.file_path}")
+
+      # stream = {}
+      # nodes = []
+      # links = []
+
+      # iteration = 12
+
+      # iteration.times do |i|
+      #   nodes << {:name => i, :label => i, :type => "Artifact"}
+      # end 
+
+      # (iteration - 1).times do |i|
+      #   links << {:source => i, :target => i+1, :value => 50}
+      # end
+
+      # stream = {:nodes => nodes, :links => links }
+
+      # @provenance = stream
+
+    end # if provenance
+
+    #return 
+    @provenance 
+  end # def provenance
+
 end
