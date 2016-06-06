@@ -5,8 +5,9 @@ section.content
   .row
     .col-xs-12
       .box.box-primary
-        = render partial: 'form'
-
+        # = render partial: 'form'
+        | This option has been disabled by the administrator.
+        
 = link_to 'Show', @data_bundle
 '|
 = link_to 'Back', data_bundles_path

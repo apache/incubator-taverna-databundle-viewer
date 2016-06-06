@@ -1,31 +1,86 @@
 section.content-header
   h1
-    = "DataBundle #{@data_bundle.name}"
+    = "#{link_to 'DataBundle: ', data_bundles_path}#{@data_bundle.name}".html_safe
+
 section.content
-  = link_to '<- Back', data_bundles_path
-  .box.box-default
-    .box-body
-      table.table.table-bordered
-        tbody
-          tr
-            td Workflow name
-            td
-              = @data_bundle.workflow.annotations.name
-          tr
-            td Authors
-            td
-              = @data_bundle.workflow.annotations.authors.join(' ')
-          tr
-            td Titles
-            td
-              = @data_bundle.workflow.annotations.titles.join(' ')
-          tr
-            td Description
-            td
-              = @data_bundle.workflow.annotations.descriptions.join(' ')
-          tr
-            td Semantic annotation
-            td
-              = @data_bundle.workflow.annotations.semantic_annotation
-      svg#graphContainer
+  .container-fluid
+    .row-fluid
+      .span8.well
+        ul#subject.nav.nav-tabs
+          li.active
+            a data-target="#workflow" data-toggle="tab"  Workflow
+          li
+            a data-target="#provenance" data-toggle="tab"  Provenance
+        .tab-content
+          #workflow.tab-pane.active.fade.in 
+            .box.box-default
+              .box-body
+                table.table.table-bordered
+                  tbody
+                    tr
+                      td Workflow name
+                      td
+                        = @data_bundle.workflow.annotations.name
+                    tr
+                      td Authors
+                      td
+                        = @data_bundle.workflow.annotations.authors.join(' ')
+                    tr
+                      td Titles
+                      td
+                        = @data_bundle.workflow.annotations.titles.join(' ')
+                    tr
+                      td Description
+                      td
+                        = @data_bundle.workflow.annotations.descriptions.join(' ')
+                    tr
+                      td Semantic annotation
+                      td
+                        - if @data_bundle.workflow.annotations.semantic_annotation.nil?
+                          | -
+                        - else
+                          = @data_bundle.workflow.annotations.semantic_annotation
+                #wfContainer
+                  svg#graphContainer
+                button#saveWF.svgImage Save the workflow as image
+                canvas#canvasWF height="500" style="display:none" width="960"
+
+
+          #provenance.tab-pane
+            - if @data_bundle.provenanceMain.present?
+              .container-fluid
+                .row-fluid
+                  .span8.well
+                    ul#diagramType.nav.nav-tabs
+                      li.active
+                        a#diagramSankey data-target="#provSankey" data-toggle="tab" Sankey
+                      li
+                        a#diagramMiserables data-target="#provCooccurrence" data-toggle="tab" Co-occurrence
+                    .tab-content
+                      #provSankey.tab-pane.active.fade.in 
+                        .box.box-default
+                          .box-body
+                      #provCooccurrence.tab-pane
+                        .box.box-default
+                          .box-body
+                            p#porder
+                              | Order:
+                              select#order
+                                option value="name" by Name
+                                option value="count" by Frequency
+                                option value="type" by Type
+                    .provCont
+                      #mapContainer
+                        svg#provContainer
+                      button#enableZooming.svgImage alt=("Enabling zooming will mouse-mid button scrolling ability") type="submit" value="True" 
+                        span Enable Zooming
+
+                      button#savePROV.svgImage Save the provenance as image
+                      canvas#canvasPROV height="500" style="display:none" width="960" 
+            - else
+              .row No data to display
+              br
+            
+
+
 #data_bundle data-url=data_bundle_url(@data_bundle, format: :json)

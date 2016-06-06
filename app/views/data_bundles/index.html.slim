@@ -1,6 +1,6 @@
 section.content-header
   h1
-    | DataBundles
+    | Data Bundles
 section.content
   .row
     - if user_signed_in?
@@ -12,7 +12,7 @@ section.content
                 tr
                   th Name
                   th Date
-                  th Donwload
+                  th Download
                   th Links
                 - @data_bundles.each do |data_bundle|
                   tr
@@ -23,11 +23,9 @@ section.content
                     td
                       = link_to data_bundle.file_identifier, data_bundle.file.url
                     td
-                      = link_to 'Show', data_bundle, id: "to_show_#{data_bundle.id}"
+                      = link_to 'Visualize', data_bundle, id: "to_show_#{data_bundle.id}"
                     td
-                      = link_to 'Edit', edit_data_bundle_path(data_bundle), id: "to_edit_#{data_bundle.id}"
-                    td
-                      = link_to 'Destroy', data_bundle_path(data_bundle), method: :delete, data: {confirm: 'Are you sure?'}, id: "to_delete_#{data_bundle.id}"
+                      = link_to 'Delete bundle', data_bundle_path(data_bundle), method: :delete, data: {confirm: 'Are you sure?'}, id: "to_delete_#{data_bundle.id}"
             = paginate @data_bundles
       .col-xs-5
         .box.box-primary
@@ -39,3 +37,4 @@ section.content
         .box
           .box-body
             | For use the databundle viewer you must be logged in
+            = redirectToLogin
