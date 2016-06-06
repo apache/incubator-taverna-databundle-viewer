@@ -17,29 +17,94 @@
 * under the License.
 */
 
-svg {
-  path.link {
-    fill: none;
-    stroke: #666;
-    stroke-width: 1.5px;
-  }
+.box {
+  border-top: 0px solid #d2d6de;
+}
 
-  circle {
-    fill: #ccc;
-    stroke: #fff;
-    stroke-width: 1.5px;
-  }
+.box-body {
+  padding: 0px;
+}
 
-  text {
-    fill: #000;
-    font: 10px sans-serif;
-    pointer-events: none;
-  }
+.container {
+  width: 90%;
+}
 
-  rect {
-    fill: #585858;
+.provCont {
+  margin-top: 30px;
+}
+
+.well{
+  border: 0px solid #d2d6de;
+}
+
+#back_btn {
+  padding-left: 15px;
+}
+
+#provenance {
+  .well, .container-fluid  {
+    padding: 0px;
   }
-  .fill_text {
-    fill: red !important;
-  }
+}
+
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th{
+  border: 1px solid #ddd;
+}
+
+.svgImage {
+  position: relative;
+  top: 15px;
+  left: 88.5%;
+}
+
+#enableZooming {
+  margin-right: 20px;
+  margin-left : -146px;
+}
+
+#mapContainer {
+  position: relative;
+  left:0px;
+  top:0px;
+  overflow : auto;
+  padding : 0px;
+  margin: 0px;
+  max-height: 960px;
+}
+
+#wfContainer {
+  overflow : scroll;
+  position: relative;
+  top:10px;
+  padding-top: 10px;
+  height: 990px;
+  min-width: 990px;
+  max-width: 1586px;
+}
+
+#save_data_bundle {
+  margin-left: -10px;
+}
+
+.misbackground {
+  fill: red;
+  /*fill: #ecf0f5;*/
+  border: 1px solid #000;
+}
+
+line {
+  stroke: #0bb;
+}
+
+text.active {
+  fill: red;
+}
+
+#order {
+  margin-left: 10px;
+}
+
+#porder {
+  margin-left: 32px;
+  margin-top: 20px;
 }
