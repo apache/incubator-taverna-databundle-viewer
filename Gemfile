@@ -18,7 +18,6 @@
 #
 
 source 'https://rubygems.org'
-ruby '2.2.1'
 
 gem 'rails', '4.2.3'
 
@@ -57,6 +56,13 @@ gem 'ro-bundle'
 # A Ruby library to aid the interaction with Taverna 2 workflows
 gem 'workflow_parser', github: 'myExperiment/workflow_parser'
 gem 'taverna-t2flow', github: 'myExperiment/workflow_parser-t2flow'
+
+# A gem to build digraphs
+gem 'ruby-graphviz'
+
+# A gem to query the prov.ttl
+gem 'sparql'
+
 # A simple interface to working with ZIP archives
 gem 'archive-zip'
 # Paginator

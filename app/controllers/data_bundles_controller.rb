@@ -34,12 +34,15 @@ class DataBundlesController < ApplicationController
     @data_bundle = @data_bundle.decorate
     respond_to do |format|
       format.html
-      format.json { render json: @data_bundle.to_json }
+      # format.json { render json: @data_bundle.to_json }
+      format.json { render :json => {:workflow => @data_bundle.to_dataHashObject,
+                                     :provenance =>  @data_bundle.provenanceMain } }
     end
   end
 
   # GET /data_bundles/1/edit
   def edit
+    redirect_to data_bundles_path,  notice: "Success"
   end
 
   # POST /data_bundles
@@ -68,6 +71,11 @@ class DataBundlesController < ApplicationController
     redirect_to data_bundles_url, notice: 'Data bundle was successfully destroyed.'
   end
 
+  def redirectToLogin
+    redirect_to new_user_session_path, notice: 'Data bundle was successfully created.'
+  end
+  helper_method :redirectToLogin
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_data_bundle
@@ -77,5 +85,5 @@ class DataBundlesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def data_bundle_params
     params.require(:data_bundle).permit(:file, :name)
-  end
+  end  
 end
