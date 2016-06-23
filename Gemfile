@@ -57,9 +57,6 @@ gem 'ro-bundle'
 gem 'workflow_parser', github: 'myExperiment/workflow_parser'
 gem 'taverna-t2flow', github: 'myExperiment/workflow_parser-t2flow'
 
-# A gem to build digraphs
-gem 'ruby-graphviz'
-
 # A gem to query the prov.ttl
 gem 'sparql'
 
