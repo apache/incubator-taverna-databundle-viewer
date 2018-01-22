@@ -67,6 +67,9 @@ gem 'kaminari'
 # Loads environment variables from `.env`
 gem 'dotenv-rails'
 
+# Force newer nokogiri for security fixes
+gem 'nokogiri', '~> 1.8.1'
+
 group :development, :test do
   # More useful error page
   gem 'better_errors'

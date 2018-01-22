@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/myExperiment/workflow_parser-t2flow.git
+  remote: https://github.com/myExperiment/workflow_parser-t2flow.git
   revision: 21654f2e9c7f20281e5ed063b334870349228819
   specs:
     taverna-t2flow (0.6.0.pre.SNAPSHOT)
@@ -8,7 +8,7 @@ GIT
       workflow_parser (~> 0.0)
 
 GIT
-  remote: git://github.com/myExperiment/workflow_parser.git
+  remote: https://github.com/myExperiment/workflow_parser.git
   revision: a1b1478641e70c04397be133145e5039a98e6dd4
   specs:
     workflow_parser (0.0.1)
