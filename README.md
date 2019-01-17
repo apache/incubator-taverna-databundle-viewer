@@ -76,6 +76,7 @@ before accepting a larger contribution.
 * ruby, installed with rvm (`rvm install 2.2.1`)
 * [node](http://nodejs.org) ([on github](https://github.com/joyent/node))
 * [bower](https://github.com/bower/bower) (>= 0.10.0) installed with npm
+* `libwebkit-dev` or equivalent, try  `sudo apt install libwebkit-dev qt4-qmake libqt4-dev`
 
 **Set up**
 
