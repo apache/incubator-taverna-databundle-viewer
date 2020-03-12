@@ -14,6 +14,38 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
+
+
+## Taverna Project Retired
+
+> tl;dr: The Taverna code base is **no longer maintained** 
+> and is provided here for archival purposes.
+
+From 2014 till 2020 this code base was maintained by the 
+[Apache Incubator](https://incubator.apache.org/) project _Apache Taverna (incubating)_
+(see [web archive](https://web.archive.org/web/20200312133332/https://taverna.incubator.apache.org/)
+and [podling status](https://incubator.apache.org/projects/taverna.html)).
+
+In 2020 the Taverna community 
+[voted](https://lists.apache.org/thread.html/r559e0dd047103414fbf48a6ce1bac2e17e67504c546300f2751c067c%40%3Cdev.taverna.apache.org%3E)
+to **retire** Taverna as a project and withdraw the code base from the Apache Software Foundation. 
+
+This code base remains available under the Apache License 2.0 
+(see _License_ below), but is now simply called 
+_Taverna_ rather than ~~Apache Taverna (incubating)~~.
+
+While the code base is no longer actively maintained, 
+Pull Requests are welcome to the 
+[GitHub organization taverna](http://github.com/taverna/), 
+which may infrequently be considered by remaining 
+volunteer caretakers.
+
+
+### Previous releases
+
+This code base has not yet been formally released.
+
+
 # Apache Taverna Databundle Viewer
 
 [![Code Climate](https://codeclimate.com/github/Samhane/incubator-taverna-databundle-viewer/badges/gpa.svg)](https://codeclimate.com/github/Samhane/incubator-taverna-databundle-viewer)
@@ -24,7 +56,7 @@ Apache Taverna Databundle Viewer is planned as a web interface
 for displaying 
 [Taverna databundles](https://github.com/apache/incubator-taverna-language/tree/master/taverna-databundle)
 (workflow inputs/outputs/run), as produced by the 
-[Apache Taverna](http://taverna.incubator.apache.org/) workflow
+[Apache Taverna](https://web.archive.org/web/*/https://taverna.incubator.apache.org/) workflow
 system.
 
 This module is **work in progress** as part of Google Summer of Code 2015.
@@ -35,7 +67,7 @@ You can see working prototype there: [DataBundleViewer](http://databundle.heroku
 
 ## License
 
-(c) 2014-2015 Apache Software Foundation
+(c) 2014-2020 Apache Software Foundation
 
 This product includes software developed at The [Apache Software
 Foundation](http://www.apache.org/).
@@ -50,18 +82,6 @@ details about embedded third-party libraries and source code.
 
 # Contribute
 
-Please subscribe to and contact the 
-[dev@taverna](http://taverna.incubator.apache.org/community/lists#dev mailing list)
-for any questions, suggestions and discussions about the 
-Apache Taverna Databundle Viewer.
-
-Bugs and feature plannings are tracked in the Jira
-[Issue tracker](https://issues.apache.org/jira/browse/TAVERNA/component/12326902)
-under the `TAVERNA` component _GSOC Taverna Databundle Viewer_. Feel free 
-to add an issue!
-
-To suggest changes to this source code, feel free to raise a 
-[GitHub pull request](https://github.com/apache/incubator-taverna-databundle-viewer/pulls).
 Any contributions received are assumed to be covered by the [Apache License
 2.0](https://www.apache.org/licenses/LICENSE-2.0). We might ask you 
 to sign a [Contributor License Agreement](https://www.apache.org/licenses/#clas)
